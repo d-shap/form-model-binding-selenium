@@ -9,7 +9,7 @@
 
     <name>Form model selenium binding</name>
     <description>Form model selenium binding is a form model implementation for Selenium</description>
-    <url>https://github.com/d-shap/form-model</url>
+    <url>https://github.com/d-shap/form-model-binding-selenium</url>
 
     <licenses>
         <license>
