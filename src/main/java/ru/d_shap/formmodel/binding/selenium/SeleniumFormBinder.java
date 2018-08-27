@@ -110,6 +110,7 @@ public final class SeleniumFormBinder extends FormBinder<SeleniumForm, SeleniumE
      * Bind current html with the form definition.
      *
      * @param formId the form ID.
+     *
      * @return Binded form.
      */
     public SeleniumForm bind(final String formId) {
