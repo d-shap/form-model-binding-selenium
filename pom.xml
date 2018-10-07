@@ -8,7 +8,7 @@
     <packaging>jar</packaging>
 
     <name>Form model selenium binding</name>
-    <description>Form model selenium binding is a form model implementation for Selenium</description>
+    <description>Form model selenium binding is a form model binding implementation for Selenium</description>
     <url>https://github.com/d-shap/form-model-binding-selenium</url>
 
     <licenses>
@@ -44,14 +44,14 @@
             <version>1.0</version>
         </dependency>
         <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>3.9.1</version>
-        </dependency>
-        <dependency>
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
             <version>1.11.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>3.9.1</version>
         </dependency>
     </dependencies>
 

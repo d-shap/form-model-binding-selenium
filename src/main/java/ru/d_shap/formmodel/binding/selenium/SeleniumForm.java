@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-// Form model selenium binding is a form model implementation for Selenium.
+// Form model selenium binding is a form model binding implementation for Selenium.
 // Copyright (C) 2018 Dmitry Shapovalov.
 //
 // This file is part of form model selenium binding.
