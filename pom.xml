@@ -309,7 +309,7 @@
                             </execution>
                         </executions>
                         <configuration>
-                            <keyname>maven signature - form-model-binding-selenium</keyname>
+                            <keyname>(maven signature - form-model-binding-selenium)</keyname>
                         </configuration>
                     </plugin>
                 </plugins>
