@@ -22,7 +22,7 @@ package ru.d_shap.formmodel.binding.selenium;
 import ru.d_shap.formmodel.binding.html.HtmlBindedAttribute;
 
 /**
- * The selenium binded attribute implementation.
+ * The Selenium binded attribute implementation.
  *
  * @author Dmitry Shapovalov
  */

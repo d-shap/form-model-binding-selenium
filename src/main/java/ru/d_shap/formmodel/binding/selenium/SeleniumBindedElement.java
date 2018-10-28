@@ -25,7 +25,7 @@ import org.openqa.selenium.WebElement;
 import ru.d_shap.formmodel.binding.html.HtmlBindedElement;
 
 /**
- * The selenium binded element.
+ * The Selenium binded element.
  *
  * @author Dmitry Shapovalov
  */
