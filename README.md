@@ -2,11 +2,11 @@ Form model selenium binding
 ===========================
 Form model selenium binding is a form model binding implementation for Selenium.
 
-Maven artifact
+Latest release
 ==============
-* **groupId**: ru.d-shap
-* **artifactId**: form-model-binding-selenium
-* **version**: 1.0
+* **&lt;groupId&gt;**: ru.d-shap
+* **&lt;artifactId&gt;**: form-model-binding-selenium
+* **&lt;version&gt;**: -.-
 
 Donation
 ========
