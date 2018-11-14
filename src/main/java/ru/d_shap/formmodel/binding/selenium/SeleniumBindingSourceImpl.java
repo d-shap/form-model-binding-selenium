@@ -43,4 +43,9 @@ final class SeleniumBindingSourceImpl implements SeleniumBindingSource {
         return Jsoup.parse(html);
     }
 
+    @Override
+    public WebDriver getWebDriver() {
+        return _webDriver;
+    }
+
 }

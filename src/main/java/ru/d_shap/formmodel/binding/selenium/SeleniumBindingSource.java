@@ -19,6 +19,8 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 package ru.d_shap.formmodel.binding.selenium;
 
+import org.openqa.selenium.WebDriver;
+
 import ru.d_shap.formmodel.binding.html.HtmlBindingSource;
 
 /**
@@ -27,5 +29,12 @@ import ru.d_shap.formmodel.binding.html.HtmlBindingSource;
  * @author Dmitry Shapovalov
  */
 public interface SeleniumBindingSource extends HtmlBindingSource {
+
+    /**
+     * Get the web driver.
+     *
+     * @return the web driver.
+     */
+    WebDriver getWebDriver();
 
 }
