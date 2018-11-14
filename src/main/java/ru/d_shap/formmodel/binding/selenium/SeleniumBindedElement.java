@@ -39,13 +39,6 @@ public interface SeleniumBindedElement extends HtmlBindedElement {
     WebDriver getWebDriver();
 
     /**
-     * Get the css selector for the web element.
-     *
-     * @return the css selector for the web element.
-     */
-    String getCssSelector();
-
-    /**
      * Get the web element.
      *
      * @return the web element.
