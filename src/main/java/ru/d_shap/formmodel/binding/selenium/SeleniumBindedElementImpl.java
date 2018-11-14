@@ -37,18 +37,20 @@ final class SeleniumBindedElementImpl implements SeleniumBindedElement {
 
     private final HtmlBindedElement _htmlBindedElement;
 
-    private final String _cssSelector;
-
     SeleniumBindedElementImpl(final WebDriver webDriver, final HtmlBindedElement htmlBindedElement) {
         super();
         _webDriver = webDriver;
         _htmlBindedElement = htmlBindedElement;
-        _cssSelector = _htmlBindedElement.getElement().cssSelector();
     }
 
     @Override
     public Element getElement() {
         return _htmlBindedElement.getElement();
+    }
+
+    @Override
+    public String cssSelector() {
+        return _htmlBindedElement.cssSelector();
     }
 
     @Override
@@ -62,13 +64,18 @@ final class SeleniumBindedElementImpl implements SeleniumBindedElement {
     }
 
     @Override
-    public String getAttributeValue(final String attributeName) {
-        return _htmlBindedElement.getAttributeValue(attributeName);
+    public boolean hasAttribute(final String name) {
+        return _htmlBindedElement.hasAttribute(name);
     }
 
     @Override
-    public String getAbsoluteAttributeValue(final String attributeName) {
-        return _htmlBindedElement.getAbsoluteAttributeValue(attributeName);
+    public String getAttribute(final String name) {
+        return _htmlBindedElement.getAttribute(name);
+    }
+
+    @Override
+    public String getAbsoluteAttribute(final String name) {
+        return _htmlBindedElement.getAbsoluteAttribute(name);
     }
 
     @Override
@@ -77,13 +84,9 @@ final class SeleniumBindedElementImpl implements SeleniumBindedElement {
     }
 
     @Override
-    public String getCssSelector() {
-        return _cssSelector;
-    }
-
-    @Override
     public WebElement getWebElement() {
-        return _webDriver.findElement(By.cssSelector(_cssSelector));
+        String cssSelector = cssSelector();
+        return _webDriver.findElement(By.cssSelector(cssSelector));
     }
 
     @Override
