@@ -36,6 +36,11 @@ final class SeleniumBindedAttributeImpl implements SeleniumBindedAttribute {
     }
 
     @Override
+    public String getName() {
+        return _htmlBindedAttribute.getName();
+    }
+
+    @Override
     public String getValue() {
         return _htmlBindedAttribute.getValue();
     }
