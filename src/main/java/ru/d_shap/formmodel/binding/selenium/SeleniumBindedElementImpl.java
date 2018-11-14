@@ -37,10 +37,16 @@ final class SeleniumBindedElementImpl implements SeleniumBindedElement {
 
     private final HtmlBindedElement _htmlBindedElement;
 
+    private final String _cssSelector;
+
+    private WebElement _webElement;
+
     SeleniumBindedElementImpl(final WebDriver webDriver, final HtmlBindedElement htmlBindedElement) {
         super();
         _webDriver = webDriver;
         _htmlBindedElement = htmlBindedElement;
+        _cssSelector = _htmlBindedElement.cssSelector();
+        _webElement = null;
     }
 
     @Override
@@ -50,7 +56,7 @@ final class SeleniumBindedElementImpl implements SeleniumBindedElement {
 
     @Override
     public String cssSelector() {
-        return _htmlBindedElement.cssSelector();
+        return _cssSelector;
     }
 
     @Override
@@ -85,8 +91,10 @@ final class SeleniumBindedElementImpl implements SeleniumBindedElement {
 
     @Override
     public WebElement getWebElement() {
-        String cssSelector = cssSelector();
-        return _webDriver.findElement(By.cssSelector(cssSelector));
+        if (_webElement == null) {
+            _webElement = _webDriver.findElement(By.cssSelector(_cssSelector));
+        }
+        return _webElement;
     }
 
     @Override
