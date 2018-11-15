@@ -50,7 +50,7 @@ abstract class Frame {
 
         private final int _index;
 
-        private IndexedFrame(final WebDriver webDriver, final int index) {
+        IndexedFrame(final WebDriver webDriver, final int index) {
             super(webDriver);
             _index = index;
         }
@@ -71,7 +71,7 @@ abstract class Frame {
 
         private final String _name;
 
-        private NamedFrame(final WebDriver webDriver, final String name) {
+        NamedFrame(final WebDriver webDriver, final String name) {
             super(webDriver);
             _name = name;
         }
