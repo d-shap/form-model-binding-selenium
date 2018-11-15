@@ -30,7 +30,7 @@ abstract class Frame {
 
     private final WebDriver _webDriver;
 
-    private Frame(final WebDriver webDriver) {
+    Frame(final WebDriver webDriver) {
         super();
         _webDriver = webDriver;
     }
