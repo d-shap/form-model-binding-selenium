@@ -35,7 +35,7 @@ final class SeleniumBindedElementImpl implements SeleniumBindedElement {
 
     private final WebDriver _webDriver;
 
-    private final Frames _frames;
+    private final SeleniumFrames _seleniumFrames;
 
     private final HtmlBindedElement _htmlBindedElement;
 
@@ -43,10 +43,10 @@ final class SeleniumBindedElementImpl implements SeleniumBindedElement {
 
     private WebElement _webElement;
 
-    SeleniumBindedElementImpl(final WebDriver webDriver, final Frames frames, final HtmlBindedElement htmlBindedElement) {
+    SeleniumBindedElementImpl(final WebDriver webDriver, final SeleniumFrames seleniumFrames, final HtmlBindedElement htmlBindedElement) {
         super();
         _webDriver = webDriver;
-        _frames = frames;
+        _seleniumFrames = seleniumFrames;
         _htmlBindedElement = htmlBindedElement;
         _cssSelector = _htmlBindedElement.cssSelector();
         _webElement = null;
@@ -88,8 +88,8 @@ final class SeleniumBindedElementImpl implements SeleniumBindedElement {
     }
 
     @Override
-    public Frames getFrames() {
-        return _frames;
+    public SeleniumFrames getSeleniumFrames() {
+        return _seleniumFrames;
     }
 
     @Override
@@ -99,7 +99,7 @@ final class SeleniumBindedElementImpl implements SeleniumBindedElement {
 
     @Override
     public WebElement getWebElement() {
-        _frames.switchTo(_webDriver);
+        _seleniumFrames.switchTo(_webDriver);
         if (_webElement == null) {
             _webElement = _webDriver.findElement(By.cssSelector(_cssSelector));
         }
