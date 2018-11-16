@@ -68,4 +68,20 @@ final class SeleniumFrames {
         }
     }
 
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        result.append('/');
+        boolean first = true;
+        for (SeleniumFrame seleniumFrame : _seleniumFrames) {
+            if (first) {
+                first = false;
+            } else {
+                result.append('/');
+            }
+            result.append(seleniumFrame);
+        }
+        return result.toString();
+    }
+
 }
