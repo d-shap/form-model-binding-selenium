@@ -32,6 +32,13 @@ import ru.d_shap.formmodel.binding.html.HtmlBindedElement;
 public interface SeleniumBindedElement extends HtmlBindedElement {
 
     /**
+     * Get the frames.
+     *
+     * @return the frames.
+     */
+    Frames getFrames();
+
+    /**
      * Get the web driver.
      *
      * @return the web driver.

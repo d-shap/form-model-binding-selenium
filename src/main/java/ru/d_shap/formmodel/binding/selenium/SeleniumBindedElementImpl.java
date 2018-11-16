@@ -35,15 +35,18 @@ final class SeleniumBindedElementImpl implements SeleniumBindedElement {
 
     private final WebDriver _webDriver;
 
+    private final Frames _frames;
+
     private final HtmlBindedElement _htmlBindedElement;
 
     private final String _cssSelector;
 
     private WebElement _webElement;
 
-    SeleniumBindedElementImpl(final WebDriver webDriver, final HtmlBindedElement htmlBindedElement) {
+    SeleniumBindedElementImpl(final WebDriver webDriver, final Frames frames, final HtmlBindedElement htmlBindedElement) {
         super();
         _webDriver = webDriver;
+        _frames = frames;
         _htmlBindedElement = htmlBindedElement;
         _cssSelector = _htmlBindedElement.cssSelector();
         _webElement = null;
@@ -85,13 +88,25 @@ final class SeleniumBindedElementImpl implements SeleniumBindedElement {
     }
 
     @Override
+    public Frames getFrames() {
+        return _frames;
+    }
+
+    @Override
     public WebDriver getWebDriver() {
         return _webDriver;
     }
 
     @Override
     public WebElement getWebElement() {
+        return getWebElement(true);
+    }
+
+    private WebElement getWebElement(final boolean switchTo) {
         if (_webElement == null) {
+            if (switchTo) {
+                _frames.switchTo(_webDriver);
+            }
             _webElement = _webDriver.findElement(By.cssSelector(_cssSelector));
         }
         return _webElement;
@@ -99,22 +114,26 @@ final class SeleniumBindedElementImpl implements SeleniumBindedElement {
 
     @Override
     public void click() {
-        getWebElement().click();
+        _frames.switchTo(_webDriver);
+        getWebElement(false).click();
     }
 
     @Override
     public void clear() {
-        getWebElement().clear();
+        _frames.switchTo(_webDriver);
+        getWebElement(false).clear();
     }
 
     @Override
     public void sendKeys(final CharSequence charSequence) {
-        getWebElement().sendKeys(charSequence);
+        _frames.switchTo(_webDriver);
+        getWebElement(false).sendKeys(charSequence);
     }
 
     @Override
     public void submit() {
-        getWebElement().submit();
+        _frames.switchTo(_webDriver);
+        getWebElement(false).submit();
     }
 
 }
