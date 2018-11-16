@@ -25,41 +25,46 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 
 /**
- * The set of HTML frames or iframes.
+ * The set of Selenium frames or iframes.
  *
  * @author Dmitry Shapovalov
  */
-final class Frames {
+final class SeleniumFrames {
 
-    private final List<Frame> _frames;
+    private final List<SeleniumFrame> _seleniumFrames;
 
-    Frames(final String frame) {
+    SeleniumFrames() {
         super();
-        _frames = new ArrayList<>();
-        addFrame(frame);
+        _seleniumFrames = new ArrayList<>();
     }
 
-    Frames(final Frames frames, final String frame) {
+    SeleniumFrames(final String frame) {
         super();
-        _frames = new ArrayList<>(frames._frames);
-        addFrame(frame);
+        _seleniumFrames = new ArrayList<>();
+        addSeleniumFrame(frame);
     }
 
-    private void addFrame(final String frame) {
+    SeleniumFrames(final SeleniumFrames seleniumFrames, final String frame) {
+        super();
+        _seleniumFrames = new ArrayList<>(seleniumFrames._seleniumFrames);
+        addSeleniumFrame(frame);
+    }
+
+    private void addSeleniumFrame(final String frame) {
         if (frame != null) {
             try {
                 int index = Integer.parseInt(frame);
-                _frames.add(new Frame.IndexedFrame(index));
+                _seleniumFrames.add(new SeleniumFrame.IndexedSeleniumFrame(index));
             } catch (NumberFormatException ex) {
-                _frames.add(new Frame.NamedFrame(frame));
+                _seleniumFrames.add(new SeleniumFrame.NamedSeleniumFrame(frame));
             }
         }
     }
 
     void switchTo(final WebDriver webDriver) {
         webDriver.switchTo().defaultContent();
-        for (Frame frame : _frames) {
-            frame.switchTo(webDriver);
+        for (SeleniumFrame seleniumFrame : _seleniumFrames) {
+            seleniumFrame.switchTo(webDriver);
         }
     }
 
