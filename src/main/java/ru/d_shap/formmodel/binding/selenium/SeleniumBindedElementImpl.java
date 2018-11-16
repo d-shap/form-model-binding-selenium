@@ -99,14 +99,8 @@ final class SeleniumBindedElementImpl implements SeleniumBindedElement {
 
     @Override
     public WebElement getWebElement() {
-        return getWebElement(true);
-    }
-
-    private WebElement getWebElement(final boolean switchTo) {
+        _frames.switchTo(_webDriver);
         if (_webElement == null) {
-            if (switchTo) {
-                _frames.switchTo(_webDriver);
-            }
             _webElement = _webDriver.findElement(By.cssSelector(_cssSelector));
         }
         return _webElement;
@@ -114,26 +108,22 @@ final class SeleniumBindedElementImpl implements SeleniumBindedElement {
 
     @Override
     public void click() {
-        _frames.switchTo(_webDriver);
-        getWebElement(false).click();
+        getWebElement().click();
     }
 
     @Override
     public void clear() {
-        _frames.switchTo(_webDriver);
-        getWebElement(false).clear();
+        getWebElement().clear();
     }
 
     @Override
     public void sendKeys(final CharSequence charSequence) {
-        _frames.switchTo(_webDriver);
-        getWebElement(false).sendKeys(charSequence);
+        getWebElement().sendKeys(charSequence);
     }
 
     @Override
     public void submit() {
-        _frames.switchTo(_webDriver);
-        getWebElement(false).submit();
+        getWebElement().submit();
     }
 
 }
