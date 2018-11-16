@@ -22,28 +22,28 @@ package ru.d_shap.formmodel.binding.selenium;
 import org.openqa.selenium.WebDriver;
 
 /**
- * The HTML frame or iframe.
+ * The Selenium frame or iframe.
  *
  * @author Dmitry Shapovalov
  */
-abstract class Frame {
+abstract class SeleniumFrame {
 
-    Frame() {
+    SeleniumFrame() {
         super();
     }
 
     abstract void switchTo(WebDriver webDriver);
 
     /**
-     * The HTML frame or iframe, identified by index.
+     * The Selenium frame or iframe, identified by index.
      *
      * @author Dmitry Shapovalov
      */
-    static final class IndexedFrame extends Frame {
+    static final class IndexedSeleniumFrame extends SeleniumFrame {
 
         private final int _index;
 
-        IndexedFrame(final int index) {
+        IndexedSeleniumFrame(final int index) {
             super();
             _index = index;
         }
@@ -56,15 +56,15 @@ abstract class Frame {
     }
 
     /**
-     * The HTML frame or iframe, identified by name.
+     * The Selenium frame or iframe, identified by name.
      *
      * @author Dmitry Shapovalov
      */
-    static final class NamedFrame extends Frame {
+    static final class NamedSeleniumFrame extends SeleniumFrame {
 
         private final String _name;
 
-        NamedFrame(final String name) {
+        NamedSeleniumFrame(final String name) {
             super();
             _name = name;
         }
