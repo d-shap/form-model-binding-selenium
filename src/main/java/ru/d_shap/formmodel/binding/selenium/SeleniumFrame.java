@@ -53,6 +53,11 @@ abstract class SeleniumFrame {
             webDriver.switchTo().frame(_index);
         }
 
+        @Override
+        public String toString() {
+            return String.valueOf(_index);
+        }
+
     }
 
     /**
@@ -72,6 +77,11 @@ abstract class SeleniumFrame {
         @Override
         void switchTo(final WebDriver webDriver) {
             webDriver.switchTo().frame(_name);
+        }
+
+        @Override
+        public String toString() {
+            return _name;
         }
 
     }
