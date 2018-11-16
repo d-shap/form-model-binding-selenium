@@ -21,14 +21,12 @@ package ru.d_shap.formmodel.binding.selenium;
 
 import org.openqa.selenium.WebDriver;
 
-import ru.d_shap.formmodel.binding.html.HtmlBindingSource;
-
 /**
  * The Selenium binding source.
  *
  * @author Dmitry Shapovalov
  */
-public interface SeleniumBindingSource extends HtmlBindingSource {
+public interface SeleniumBindingSource {
 
     /**
      * Get the web driver.
