@@ -28,18 +28,11 @@ import org.openqa.selenium.WebDriver;
  */
 abstract class Frame {
 
-    private final WebDriver _webDriver;
-
-    Frame(final WebDriver webDriver) {
+    Frame() {
         super();
-        _webDriver = webDriver;
     }
 
-    WebDriver getWebDriver() {
-        return _webDriver;
-    }
-
-    abstract void switchTo();
+    abstract void switchTo(WebDriver webDriver);
 
     /**
      * The HTML frame or iframe, identified by index.
@@ -50,14 +43,14 @@ abstract class Frame {
 
         private final int _index;
 
-        IndexedFrame(final WebDriver webDriver, final int index) {
-            super(webDriver);
+        IndexedFrame(final int index) {
+            super();
             _index = index;
         }
 
         @Override
-        void switchTo() {
-            getWebDriver().switchTo().frame(_index);
+        void switchTo(final WebDriver webDriver) {
+            webDriver.switchTo().frame(_index);
         }
 
     }
@@ -71,14 +64,14 @@ abstract class Frame {
 
         private final String _name;
 
-        NamedFrame(final WebDriver webDriver, final String name) {
-            super(webDriver);
+        NamedFrame(final String name) {
+            super();
             _name = name;
         }
 
         @Override
-        void switchTo() {
-            getWebDriver().switchTo().frame(_name);
+        void switchTo(final WebDriver webDriver) {
+            webDriver.switchTo().frame(_name);
         }
 
     }

@@ -31,20 +31,16 @@ import org.openqa.selenium.WebDriver;
  */
 final class Frames {
 
-    private final WebDriver _webDriver;
-
     private final List<Frame> _frames;
 
-    Frames(final WebDriver webDriver, final String frame) {
+    Frames(final String frame) {
         super();
-        _webDriver = webDriver;
         _frames = new ArrayList<>();
         addFrame(frame);
     }
 
     Frames(final Frames frames, final String frame) {
         super();
-        _webDriver = frames._webDriver;
         _frames = new ArrayList<>(frames._frames);
         addFrame(frame);
     }
@@ -53,17 +49,17 @@ final class Frames {
         if (frame != null) {
             try {
                 int index = Integer.parseInt(frame);
-                _frames.add(new Frame.IndexedFrame(_webDriver, index));
+                _frames.add(new Frame.IndexedFrame(index));
             } catch (NumberFormatException ex) {
-                _frames.add(new Frame.NamedFrame(_webDriver, frame));
+                _frames.add(new Frame.NamedFrame(frame));
             }
         }
     }
 
-    void switchTo() {
-        _webDriver.switchTo().defaultContent();
+    void switchTo(final WebDriver webDriver) {
+        webDriver.switchTo().defaultContent();
         for (Frame frame : _frames) {
-            frame.switchTo();
+            frame.switchTo(webDriver);
         }
     }
 
