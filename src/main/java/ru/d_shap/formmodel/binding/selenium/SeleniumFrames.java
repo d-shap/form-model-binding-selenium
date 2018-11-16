@@ -33,24 +33,12 @@ final class SeleniumFrames {
 
     private final List<SeleniumFrame> _seleniumFrames;
 
-    SeleniumFrames() {
-        super();
-        _seleniumFrames = new ArrayList<>();
-    }
-
-    SeleniumFrames(final String frame) {
-        super();
-        _seleniumFrames = new ArrayList<>();
-        addSeleniumFrame(frame);
-    }
-
     SeleniumFrames(final SeleniumFrames seleniumFrames, final String frame) {
         super();
-        _seleniumFrames = new ArrayList<>(seleniumFrames._seleniumFrames);
-        addSeleniumFrame(frame);
-    }
-
-    private void addSeleniumFrame(final String frame) {
+        _seleniumFrames = new ArrayList<>();
+        if (seleniumFrames != null) {
+            _seleniumFrames.addAll(seleniumFrames._seleniumFrames);
+        }
         if (frame != null) {
             try {
                 int index = Integer.parseInt(frame);
