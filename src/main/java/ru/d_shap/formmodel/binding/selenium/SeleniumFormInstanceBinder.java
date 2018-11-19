@@ -20,13 +20,8 @@
 package ru.d_shap.formmodel.binding.selenium;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import org.jsoup.Jsoup;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -34,7 +29,6 @@ import ru.d_shap.formmodel.binding.FormInstanceBinder;
 import ru.d_shap.formmodel.binding.html.HtmlBindedAttribute;
 import ru.d_shap.formmodel.binding.html.HtmlBindedElement;
 import ru.d_shap.formmodel.binding.html.HtmlBindedForm;
-import ru.d_shap.formmodel.binding.html.HtmlBindingSource;
 import ru.d_shap.formmodel.binding.html.HtmlFormInstanceBinder;
 import ru.d_shap.formmodel.binding.model.BindedAttribute;
 import ru.d_shap.formmodel.binding.model.BindedElement;
@@ -53,78 +47,42 @@ public final class SeleniumFormInstanceBinder implements FormInstanceBinder {
 
     private final HtmlFormInstanceBinder _htmlFormInstanceBinder;
 
-    private final Map<String, HtmlBindingSource> _htmlBindingSources;
-
     /**
      * Create new object.
      */
     public SeleniumFormInstanceBinder() {
         super();
         _htmlFormInstanceBinder = new HtmlFormInstanceBinder();
-        _htmlBindingSources = new HashMap<>();
     }
 
     @Override
     public void preBind(final BindingSource bindingSource, final FormDefinition formDefinition) {
         _htmlFormInstanceBinder.preBind(bindingSource, formDefinition);
-        _htmlBindingSources.clear();
     }
 
     @Override
     public void postBind(final BindingSource bindingSource, final FormDefinition formDefinition, final Document document) {
         _htmlFormInstanceBinder.postBind(bindingSource, formDefinition, document);
-        _htmlBindingSources.clear();
     }
 
     @Override
     public BindedForm bindFormDefinition(final BindingSource bindingSource, final BindedForm lastBindedForm, final BindedElement lastBindedElement, final Element parentElement, final FormDefinition formDefinition) {
-        WebDriver webDriver = ((SeleniumBindingSource) bindingSource).getWebDriver();
-        SeleniumFrames seleniumFrames = getSeleniumFrames(lastBindedForm, formDefinition);
-        HtmlBindingSource htmlBindingSource = getHtmlBindingSource(webDriver, seleniumFrames);
-        BindedForm bindedForm = _htmlFormInstanceBinder.bindFormDefinition(htmlBindingSource, lastBindedForm, lastBindedElement, parentElement, formDefinition);
+        BindedForm bindedForm = _htmlFormInstanceBinder.bindFormDefinition(bindingSource, lastBindedForm, lastBindedElement, parentElement, formDefinition);
         if (bindedForm instanceof HtmlBindedForm) {
-            return new SeleniumBindedFormImpl(webDriver, seleniumFrames, (HtmlBindedForm) bindedForm);
+            return new SeleniumBindedFormImpl(((SeleniumBindingSource) bindingSource).getWebDriver(), (HtmlBindedForm) bindedForm);
         } else {
             return null;
         }
     }
 
-    private SeleniumFrames getSeleniumFrames(final BindedForm lastBindedForm, final FormDefinition formDefinition) {
-        SeleniumFrames parentSeleniumFrames;
-        if (lastBindedForm == null) {
-            parentSeleniumFrames = null;
-        } else {
-            parentSeleniumFrames = ((SeleniumBindedForm) lastBindedForm).getSeleniumFrames();
-        }
-        String frame = formDefinition.getOtherAttributeValue("frame");
-        // Проверка на абсолютное значение, разбиение на части
-        return new SeleniumFrames(parentSeleniumFrames, frame);
-    }
-
-    private HtmlBindingSource getHtmlBindingSource(final WebDriver webDriver, final SeleniumFrames seleniumFrames) {
-        String htmlBindingSourceKey = seleniumFrames.toString();
-        HtmlBindingSource htmlBindingSource = _htmlBindingSources.get(htmlBindingSourceKey);
-        if (htmlBindingSource == null) {
-            seleniumFrames.switchTo(webDriver);
-            String html = webDriver.getPageSource();
-            String baseUrl = (String) ((JavascriptExecutor) webDriver).executeScript("return document.location.href");
-            org.jsoup.nodes.Document document = Jsoup.parse(html, baseUrl);
-            htmlBindingSource = new HtmlBindingSourceImpl(document);
-            _htmlBindingSources.put(htmlBindingSourceKey, htmlBindingSource);
-        }
-        return htmlBindingSource;
-    }
-
     @Override
     public List<BindedElement> bindElementDefinition(final BindingSource bindingSource, final BindedForm lastBindedForm, final BindedElement lastBindedElement, final Element parentElement, final ElementDefinition elementDefinition) {
-        WebDriver webDriver = ((SeleniumBindingSource) bindingSource).getWebDriver();
-        SeleniumFrames seleniumFrames = ((SeleniumBindedForm) lastBindedForm).getSeleniumFrames();
         List<BindedElement> bindedElements = _htmlFormInstanceBinder.bindElementDefinition(bindingSource, lastBindedForm, lastBindedElement, parentElement, elementDefinition);
         List<BindedElement> seleniumBindedElements = new ArrayList<>();
         if (bindedElements != null) {
             for (BindedElement bindedElement : bindedElements) {
                 if (bindedElement instanceof HtmlBindedElement) {
-                    SeleniumBindedElement seleniumBindedElement = new SeleniumBindedElementImpl(webDriver, seleniumFrames, (HtmlBindedElement) bindedElement);
+                    SeleniumBindedElement seleniumBindedElement = new SeleniumBindedElementImpl(((SeleniumBindingSource) bindingSource).getWebDriver(), (HtmlBindedElement) bindedElement);
                     seleniumBindedElements.add(seleniumBindedElement);
                 }
             }

@@ -19,6 +19,9 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 package ru.d_shap.formmodel.binding.selenium;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -33,6 +36,13 @@ final class SeleniumBindingSourceImpl implements SeleniumBindingSource {
     SeleniumBindingSourceImpl(final WebDriver webDriver) {
         super();
         _webDriver = webDriver;
+    }
+
+    @Override
+    public Document getDocument() {
+        String html = _webDriver.getPageSource();
+        String baseUrl = (String) ((JavascriptExecutor) _webDriver).executeScript("return document.location.href");
+        return Jsoup.parse(html, baseUrl);
     }
 
     @Override

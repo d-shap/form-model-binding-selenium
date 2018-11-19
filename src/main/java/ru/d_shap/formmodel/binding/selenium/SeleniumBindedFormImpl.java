@@ -33,25 +33,17 @@ final class SeleniumBindedFormImpl implements SeleniumBindedForm {
 
     private final WebDriver _webDriver;
 
-    private final SeleniumFrames _seleniumFrames;
-
     private final HtmlBindedForm _htmlBindedForm;
 
-    SeleniumBindedFormImpl(final WebDriver webDriver, final SeleniumFrames seleniumFrames, final HtmlBindedForm htmlBindedForm) {
+    SeleniumBindedFormImpl(final WebDriver webDriver, final HtmlBindedForm htmlBindedForm) {
         super();
         _webDriver = webDriver;
-        _seleniumFrames = seleniumFrames;
         _htmlBindedForm = htmlBindedForm;
     }
 
     @Override
     public Document getDocument() {
         return _htmlBindedForm.getDocument();
-    }
-
-    @Override
-    public SeleniumFrames getSeleniumFrames() {
-        return _seleniumFrames;
     }
 
     @Override
