@@ -19,8 +19,6 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 package ru.d_shap.formmodel.binding.selenium;
 
-import org.openqa.selenium.WebDriver;
-
 import ru.d_shap.formmodel.Messages;
 import ru.d_shap.formmodel.binding.FormBinder;
 import ru.d_shap.formmodel.binding.FormBindingException;
@@ -35,9 +33,9 @@ import ru.d_shap.formmodel.definition.model.FormDefinition;
  */
 final class SeleniumFormBinderWait<T> {
 
-    private final WebDriver _webDriver;
-
     private final FormBinder _formBinder;
+
+    private final SeleniumBindingSource _seleniumBindingSource;
 
     private final BindAttempt<T> _bindAttempt;
 
@@ -47,10 +45,10 @@ final class SeleniumFormBinderWait<T> {
 
     private final long _sleepInMillis;
 
-    SeleniumFormBinderWait(final WebDriver webDriver, final FormBinder formBinder, final BindAttempt<T> bindAttempt, final FormDefinition formDefinition, final long timeOutInSeconds, final long sleepInMillis) {
+    SeleniumFormBinderWait(final FormBinder formBinder, final SeleniumBindingSource seleniumBindingSource, final BindAttempt<T> bindAttempt, final FormDefinition formDefinition, final long timeOutInSeconds, final long sleepInMillis) {
         super();
-        _webDriver = webDriver;
         _formBinder = formBinder;
+        _seleniumBindingSource = seleniumBindingSource;
         _bindAttempt = bindAttempt;
         _formDefinition = formDefinition;
         _timeOutInSeconds = timeOutInSeconds;
@@ -62,7 +60,7 @@ final class SeleniumFormBinderWait<T> {
         FormBindingException lastFormBindingException = null;
         while (true) {
             try {
-                return _bindAttempt.tryBind(_webDriver, _formBinder);
+                return _bindAttempt.tryBind(_formBinder, _seleniumBindingSource);
             } catch (FormBindingException ex) {
                 lastFormBindingException = ex;
             }
@@ -92,7 +90,7 @@ final class SeleniumFormBinderWait<T> {
      */
     interface BindAttempt<T> {
 
-        T tryBind(WebDriver webDriver, FormBinder formBinder);
+        T tryBind(FormBinder formBinder, SeleniumBindingSource seleniumBindingSource);
 
     }
 
