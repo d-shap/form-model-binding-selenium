@@ -231,6 +231,26 @@ for (HtmlBindedElement bindedElement: bindedElements) {
 webDriver.quit();
 ```
 
+If the source HTML page does not use AJAX-requests or JavaScript DOM manipulations, then form model html binding can be used to extract data from the source HTML page.
+```
+// Load form definitions
+FormDefinitions formDefinitions = new FormDefinitions();
+File file = new File("file with the form definition");
+FormDefinitionsLoader formDefinitionsLoader = new FormXmlDefinitionsFileLoader(file);
+formDefinitionsLoader.load(formDefinitions);
+HtmlFormBinder formBinder = new HtmlFormBinder(formDefinitions);
+
+// Bind the HTML
+Document document = formBinder.bindHtml(html, "p-extractor");
+
+// Get the binded elements and text
+List<Element> elements = formBinder.getElementsWithId(document, "p-element");
+List<HtmlBindedElement> bindedElements = formBinder.getBindedElements(elements);
+for (HtmlBindedElement bindedElement: bindedElements) {
+    bindedElement.getText();
+}
+```
+
 # Frames and child windows
 Sometimes frames and child windows are used.
 In this case every frame and every child window should be bounded separately.
@@ -243,6 +263,9 @@ Document document = formBinder.bind(webDriver, "form-id");
 
 webDriver.quit();
 ```
+
+# HOW TO
+[HOW TO examples](HOWTO.md)
 
 # Latest release
 * **&lt;groupId&gt;**: ru.d-shap
