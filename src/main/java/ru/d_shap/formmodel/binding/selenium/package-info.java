@@ -101,6 +101,9 @@
  * bindedElement.sendKeys("password");
  * bindedElement = formBinder.getBindedElementWithId(document, "submit");
  * bindedElement.click();
+ *
+ * // Quit WebDriver
+ * webDriver.quit();
  * }</pre>
  */
 package ru.d_shap.formmodel.binding.selenium;
