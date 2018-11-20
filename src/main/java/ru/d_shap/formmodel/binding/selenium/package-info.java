@@ -79,15 +79,16 @@
  *
  * // Bind the source page
  * String url = ...
+ * webDriver.get(url);
  * Document document = seleniumFormBinder.bind(webDriver, "login");
  *
  * // Use the binded form to login
  * SeleniumBindedElement bindedElement;
- * bindedElement = seleniumFormBinder.getBindedElementWithId(document, "username");
+ * bindedElement = formBinder.getBindedElementWithId(document, "username");
  * bindedElement.sendKeys("user");
- * bindedElement = seleniumFormBinder.getBindedElementWithId(document, "userpass");
+ * bindedElement = formBinder.getBindedElementWithId(document, "userpass");
  * bindedElement.sendKeys("password");
- * bindedElement = seleniumFormBinder.getBindedElementWithId(document, "submit");
+ * bindedElement = formBinder.getBindedElementWithId(document, "submit");
  * bindedElement.click();
  * }</pre>
  */
