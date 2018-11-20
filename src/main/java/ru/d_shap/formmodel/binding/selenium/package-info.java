@@ -22,7 +22,18 @@
  * Form model selenium binding is a form model binding implementation for Selenium.
  * </p>
  * <p>
- * This is the Page Object pattern implementation.
+ * This is the Page Object Design Pattern implementation. Page Object is a Design Pattern which has
+ * become popular in test automation for enhancing test maintenance and reducing code duplication.
+ * A Page Object serves as an interface to the source page of the application. The application uses the
+ * Page Object whenever it needs to interact with the UI of that source page. The benefit is that if the
+ * UI changes for the source page, the application themselves don’t need to change, only the Page Object
+ * needs to change. Subsequently all changes to support that new UI are located in one place.
+ * </p>
+ * <p>
+ * But, unlike the Page Object Design Pattern, form model is not an object-oriented class. It is the XML
+ * definition of the page elements. This definition is binded with the source page and the result of
+ * this binding is the binded form. Binded elements can be obtained from this binded form and the
+ * application uses this binded elements to interact with the UI of the source page.
  * </p>
  * <p>
  * For example, suppose the following source page:
@@ -53,7 +64,7 @@
  * This is a simple login form with inputs for user name and password and submit button.
  * </p>
  * <p>
- * The model for this login form is the following:
+ * The model for this source page is the following:
  * </p>
  * <pre>
  * &lt;?xml version="1.0"?&gt;
@@ -64,7 +75,7 @@
  * &lt;/ns1:form&gt;
  * </pre>
  * <p>
- * The following code implements the binding and interaction with the binded model:
+ * The following code implements the binding and interaction with the binded form:
  * </p>
  * <pre>{@code
  * // Load form definitions
