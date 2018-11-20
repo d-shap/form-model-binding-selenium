@@ -94,13 +94,9 @@
  * Document document = seleniumFormBinder.bind(webDriver, "login");
  *
  * // Use the binded form to login
- * SeleniumBindedElement bindedElement;
- * bindedElement = formBinder.getBindedElementWithId(document, "username");
- * bindedElement.sendKeys("user");
- * bindedElement = formBinder.getBindedElementWithId(document, "userpass");
- * bindedElement.sendKeys("password");
- * bindedElement = formBinder.getBindedElementWithId(document, "submit");
- * bindedElement.click();
+ * formBinder.getBindedElementWithId(document, "username").sendKeys("user");
+ * formBinder.getBindedElementWithId(document, "userpass").sendKeys("password");
+ * formBinder.getBindedElementWithId(document, "submit").click();
  *
  * // Quit WebDriver
  * webDriver.quit();
