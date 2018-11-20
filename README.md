@@ -198,10 +198,56 @@ JSoup selectors are used in lookup attributes of the form definition.
 * `:matchesOwn(regex)`: find elements whose own text matches the specified regular expression
 * Note that the above indexed pseudo-selectors are 0-based, that is, the first element is at index 0, the second at 1, etc
 
+# Web-scraping
+Form model selenium binding also can be used to extract data from the source HTML pages.
+But it is rather slow tool because additional processes are created (Internet Browser process, Selenium WebDriver process) and additional communication between this processes is needed.
+```
+// Load form definitions
+FormDefinitions formDefinitions = new FormDefinitions();
+File file = new File("file with the form definition");
+FormDefinitionsLoader formDefinitionsLoader = new FormXmlDefinitionsFileLoader(file);
+formDefinitionsLoader.load(formDefinitions);
+SeleniumFormBinder formBinder = new SeleniumFormBinder(formDefinitions);
+
+// Create WebDriver
+System.setProperty("webdriver.chrome.driver", "path/to/chrome/webdriver");
+ChromeOptions chromeOptions = new ChromeOptions();
+chromeOptions.setHeadless(true);
+WebDriver webDriver = new ChromeDriver(chromeOptions);
+
+// Bind the HTML
+String url = "some url";
+webDriver.get(url);
+Document document = formBinder.bind(webDriver, "p-extractor");
+
+// Get the binded elements and text
+List<Element> elements = formBinder.getElementsWithId(document, "p-element");
+List<HtmlBindedElement> bindedElements = formBinder.getBindedElements(elements);
+for (HtmlBindedElement bindedElement: bindedElements) {
+    bindedElement.getText();
+}
+
+// Quit WebDriver
+webDriver.quit();
+```
+
+# Frames and child windows
+Sometimes frames and child windows are used.
+In this case every frame and every child window should be bounded separately.
+```
+WebDriver webDriver = ...
+webDriver.get(url);
+webDriver.switchTo().frame("nameOrId");
+
+Document document = formBinder.bind(webDriver, "form-id");
+
+webDriver.quit();
+```
+
 # Latest release
 * **&lt;groupId&gt;**: ru.d-shap
 * **&lt;artifactId&gt;**: form-model-binding-selenium
-* **&lt;version&gt;**: -.-.-
+* **&lt;version&gt;**: 1.0.0
 
 # Donation
 If you find my code useful, you can [bye me a coffee](https://www.paypal.me/dshapovalov)
