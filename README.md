@@ -64,7 +64,7 @@ WebDriver webDriver = ...
 // Bind the source page
 String url = ...
 webDriver.get(url);
-Document document = seleniumFormBinder.bind(webDriver, "login");
+Document document = formBinder.bind(webDriver, "login");
 
 // Use the binded form to login
 formBinder.getBindedElementWithId(document, "username").sendKeys("user");
