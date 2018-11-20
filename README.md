@@ -222,8 +222,8 @@ Document document = formBinder.bind(webDriver, "p-extractor");
 
 // Get the binded elements and text
 List<Element> elements = formBinder.getElementsWithId(document, "p-element");
-List<HtmlBindedElement> bindedElements = formBinder.getBindedElements(elements);
-for (HtmlBindedElement bindedElement: bindedElements) {
+List<SeleniumBindedElement> bindedElements = formBinder.getBindedElements(elements);
+for (SeleniumBindedElement bindedElement: bindedElements) {
     bindedElement.getText();
 }
 
@@ -241,7 +241,8 @@ formDefinitionsLoader.load(formDefinitions);
 HtmlFormBinder formBinder = new HtmlFormBinder(formDefinitions);
 
 // Bind the HTML
-Document document = formBinder.bindHtml(html, "p-extractor");
+String url = "some url";
+Document document = formBinder.bindUrl(url, "p-extractor");
 
 // Get the binded elements and text
 List<Element> elements = formBinder.getElementsWithId(document, "p-element");
