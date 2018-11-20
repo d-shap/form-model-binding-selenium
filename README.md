@@ -200,7 +200,7 @@ JSoup selectors are used in lookup attributes of the form definition.
 
 # Web-scraping
 Form model selenium binding also can be used to extract data from the source HTML pages.
-But it is rather slow tool because additional processes are created (Internet Browser process, Selenium WebDriver process) and additional communication between this processes is needed.
+But it is rather slow because additional processes are created (Internet Browser process, Selenium WebDriver process) and additional communication between this processes is needed.
 ```
 // Load form definitions
 FormDefinitions formDefinitions = new FormDefinitions();
