@@ -242,6 +242,98 @@ public final class SeleniumFormBinder {
     }
 
     /**
+     * Perform lookup and return the binded elements found.
+     *
+     * @param node   the source node.
+     * @param lookup the XPath lookup expression.
+     *
+     * @return the binded elements.
+     */
+    public List<SeleniumBindedElement> getBindedElements(final Node node, final String lookup) {
+        List<Element> elements = getElements(node, lookup);
+        return getBindedElements(elements);
+    }
+
+    /**
+     * Perform lookup and return the binded elements with the specified ID.
+     *
+     * @param node the source node.
+     * @param id   the specified ID.
+     *
+     * @return the binded elements.
+     */
+    public List<SeleniumBindedElement> getBindedElementsWithId(final Node node, final String id) {
+        List<Element> elements = getElementsWithId(node, id);
+        return getBindedElements(elements);
+    }
+
+    /**
+     * Perform lookup and return the binded elements with the specified attribute value for the specified attribute name.
+     *
+     * @param node           the source node.
+     * @param attributeName  the specified attribute name.
+     * @param attributeValue the specified attribute value.
+     *
+     * @return the binded elements.
+     */
+    public List<SeleniumBindedElement> getBindedElementsWithAttribute(final Node node, final String attributeName, final String attributeValue) {
+        List<Element> elements = getElementsWithAttribute(node, attributeName, attributeValue);
+        return getBindedElements(elements);
+    }
+
+    /**
+     * Perform lookup and return the first binded element found.
+     *
+     * @param node   the source node.
+     * @param lookup the XPath lookup expression.
+     *
+     * @return the first binded element.
+     */
+    public SeleniumBindedElement getBindedElement(final Node node, final String lookup) {
+        List<SeleniumBindedElement> bindedElements = getBindedElements(node, lookup);
+        if (bindedElements.isEmpty()) {
+            return null;
+        } else {
+            return bindedElements.get(0);
+        }
+    }
+
+    /**
+     * Perform lookup and return the first binded element with the specified ID.
+     *
+     * @param node the source node.
+     * @param id   the specified ID.
+     *
+     * @return the first binded element.
+     */
+    public SeleniumBindedElement getBindedElementWithId(final Node node, final String id) {
+        List<SeleniumBindedElement> bindedElements = getBindedElementsWithId(node, id);
+        if (bindedElements.isEmpty()) {
+            return null;
+        } else {
+            return bindedElements.get(0);
+        }
+    }
+
+    /**
+     * Perform lookup and return the first binded element with the specified attribute value for the specified attribute name.
+     *
+     * @param node           the source node.
+     * @param attributeName  the specified attribute name.
+     * @param attributeValue the specified attribute value.
+     *
+     * @return the first binded element.
+     */
+    public SeleniumBindedElement getBindedElementWithAttribute(final Node node, final String attributeName, final String attributeValue) {
+        List<SeleniumBindedElement> bindedElements = getBindedElementsWithAttribute(node, attributeName, attributeValue);
+        if (bindedElements.isEmpty()) {
+            return null;
+        } else {
+            return bindedElements.get(0);
+        }
+    }
+
+    /**
      * Obtain the binded attributes from the specified XML elements.
      *
      * @param elements the specified XML elements.
