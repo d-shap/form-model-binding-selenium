@@ -265,6 +265,12 @@ webDriver.quit();
 [HOW TO examples](HOWTO.md)
 
 # Latest release
+Form model library:
+* **&lt;groupId&gt;**: ru.d-shap
+* **&lt;artifactId&gt;**: form-model
+* **&lt;version&gt;**: 1.0
+
+Form model selenium binding:
 * **&lt;groupId&gt;**: ru.d-shap
 * **&lt;artifactId&gt;**: form-model-binding-selenium
 * **&lt;version&gt;**: 1.0.0
