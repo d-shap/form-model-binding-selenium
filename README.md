@@ -159,40 +159,69 @@ JSoup selectors are used in lookup attributes of the form definition.
 
 [https://jsoup.org/cookbook/extracting-data/selector-syntax](https://jsoup.org/cookbook/extracting-data/selector-syntax)
 
-## Selector overview
-* `tagname`: find elements by tag, e.g. `a`
-* `ns|tag`: find elements by tag in a namespace, e.g. `fb|name` finds `<fb:name>` elements
-* `#id`: find elements by ID, e.g. `#logo`
-* `.class`: find elements by class name, e.g. `.masthead`
-* `[attribute]`: elements with attribute, e.g. `[href]`
-* `[^attr]`: elements with an attribute name prefix, e.g. `[^data-]` finds elements with HTML5 dataset attributes
-* `[attr=value]`: elements with attribute value, e.g. `[width=500]` (also quotable, like `[data-name='launch sequence']`)
-* `[attr^=value]`, `[attr$=value]`, `[attr*=value]`: elements with attributes that start with, end with, or contain the value, e.g. `[href*=/path/]`
-* `[attr~=regex]`: elements with attribute values that match the regular expression; e.g. `img[src~=(?i)\.(png|jpe?g)]`
-* `*`: all elements, e.g. `*`
+A selector is a chain of simple selectors, separated by combinators.
+Selectors are case insensitive (including against elements, attributes, and attribute values).
 
-## Selector combinations
-* `el#id`: elements with ID, e.g. `div#logo`
-* `el.class`: elements with class, e.g. `div.masthead`
-* `el[attr]`: elements with attribute, e.g. `a[href]`
-* Any combination, e.g. `a[href].highlight`
-* `ancestor child`: child elements that descend from ancestor, e.g. `.body p` finds `p` elements anywhere under a block with class `body`
-* `parent > child`: child elements that descend directly from parent, e.g. `div.content > p` finds `p` elements; and `body > *` finds the direct children of the `body` tag
-* `siblingA + siblingB`: finds sibling B element immediately preceded by sibling A, e.g. `div.head + div`
-* `siblingA ~ siblingX`: finds sibling X element preceded by sibling A, e.g. `h1 ~ p`
-* `el, el, el`: group multiple selectors, find unique elements that match any of the selectors; e.g. `div.masthead, div.logo`
+## Selectors
+|Pattern|Matches|Example|
+|-------|-------|-------|
+|`*`|any element|`*`|
+|`tag`|elements with the given tag name|`div`|
+|`*\|E`|elements of type *E* in any namespace *ns*|`*\|name` finds *&lt;fb:name&gt;* elements|
+|`ns\|E`|elements of type *E* in the namespace *ns*|`fb\|name` finds *&lt;fb:name&gt;* elements|
+|`#id`|elements with attribute ID of *id*|`div#wrap`, `#logo`|
+|`.class`|elements with a class name of *class*|`div.left`, `.result`|
+|`[attr]`|elements with an attribute named *attr* (with any value)|`a[href]`, `[title]`|
+|`[^attrPrefix]`|elements with an attribute name starting with *attrPrefix*|`[^data-]`, `div[^data-]`|
+|`[attr=val]`|elements with an attribute named *attr*, and value equal to *val*|`img[width=500]`, `a[rel=nofollow]`|
+|`[attr="val"]`|elements with an attribute named *attr*, and value equal to *val*|`span[hello="Cleveland"][goodbye="Columbus"]`, `a[rel="nofollow"]`|
+|`[attr^=valPrefix]`|elements with an attribute named *attr*, and value starting with *valPrefix*|`a[href^=http:]`|
+|`[attr$=valSuffix]`|elements with an attribute named *attr*, and value ending with *valSuffix*|`img[src$=.png]`|
+|`[attr*=valContaining]`|elements with an attribute named *attr*, and value containing *valContaining*|`a[href*=/search/]`|
+|`[attr~=regex]`|elements with an attribute named *attr*, and value matching the regular expression|`mg[src~=(?i)\\.(png\|jpe?g)]`|
+||the above may be combined in any order|`div.header[title]`|
+
+## Combinators
+|Pattern|Matches|Example|
+|-------|-------|-------|
+|`E F`|an *F* element descended from an *E* element|`div a`, `.logo h1`|
+|`E > F`|an *F* direct child of *E*|`ol > li`|
+|`E + F`|an *F* element immediately preceded by sibling *E*|`li + li`, `div.head + div`|
+|`E ~ F`|an *F* element preceded by sibling *E*|`h1 ~ p`|
+|`E, F, G`|all matching elements *E*, *F*, or *G*|`a[href], div, h3`|
 
 ## Pseudo selectors
-* `:lt(n)`: find elements whose sibling index (i.e. its position in the DOM tree relative to its parent) is less than `n`; e.g. `td:lt(3)`
-* `:gt(n)`: find elements whose sibling index is greater than `n`; e.g. `div p:gt(2)`
-* `:eq(n)`: find elements whose sibling index is equal to `n`; e.g. form `input:eq(1)`
-* `:has(selector)`: find elements that contain elements matching the selector; e.g. `div:has(p)`
-* `:not(selector)`: find elements that do not match the selector; e.g. `div:not(.logo)`
-* `:contains(text)`: find elements that contain the given text. The search is case-insensitive; e.g. `p:contains(jsoup)`
-* `:containsOwn(text)`: find elements that directly contain the given text
-* `:matches(regex)`: find elements whose text matches the specified regular expression; e.g. `div:matches((?i)login)`
-* `:matchesOwn(regex)`: find elements whose own text matches the specified regular expression
-* Note that the above indexed pseudo-selectors are 0-based, that is, the first element is at index 0, the second at 1, etc
+|Pattern|Matches|Example|
+|-------|-------|-------|
+|`:lt(n)`|elements whose sibling index is less than `n`|`td:lt(3)` finds the first 3 cells of each row|
+|`:gt(n)`|elements whose sibling index is greater than `n`|`td:gt(1)` finds cells after skipping the first two|
+|`:eq(n)`|elements whose sibling index is equal to `n`|`td:eq(0)` finds the first cell of each row|
+|`:has(selector)`|elements that contains at least one element matching the `selector`|`div:has(p)` finds *div* elements that contain *p* elements|
+|`:not(selector)`|elements that do not match the selector|`div:not(.logo)` finds all *div* elements that do not have the *logo* class, `div:not(:has(div))` finds *div* elements that do not contain *div* elements|
+|`:contains(text)`|elements that contains the specified text|`p:contains(jsoup)` finds *p* elements containing the text *jsoup*|
+|`:matches(regex)`|elements whose text matches the specified regular expression|`td:matches(\\d+)` finds table cells containing digits, `div:matches((?i)login)` finds *div* elements containing the *login* text, case insensitively|
+|`:containsOwn(text)`|elements that directly contain the specified text|`p:containsOwn(jsoup)` finds *p* elements with own text *jsoup*|
+|`:matchesOwn(regex)`|elements whose own text matches the specified regular expression|`td:matchesOwn(\\d+)` finds table cells directly containing digits, `div:matchesOwn((?i)login)` finds *div* containing the *login* text, case insensitively|
+|`:containsData(data)`|elements that contains the specified data (the contents of script and style elements, and comment nodes (etc) are considered data nodes, not text nodes)|`script:contains(jsoup)` finds *script* elements containing the data *jsoup*|
+||the above may be combined in any order and with other selectors|`.light:contains(name):eq(0)`|
+* The above indexed pseudo-selectors are 0-based, that is, the first element is at index 0, the second at 1, etc
+* The above text pseudo-selectors are case insensitive
+
+## Structural pseudo selectors
+|Pattern|Matches|Example|
+|-------|-------|-------|
+|`:root`|the element that is the root of the document or the last selected element|`:root`|
+|`:nth-child(an+b)`|elements that have `an+b-1` siblings before it in the document tree, for any positive integer or zero value of `n`, and has a parent element|`tr:nth-child(2n+1)` finds every odd row of a table, `:nth-child(10n-1)` the 9th, 19th, 29th, etc, element, `li:nth-child(5)` the 5th *li*|
+|`:nth-last-child(an+b)`|elements that have `an+b-1` siblings after it in the document tree, for any positive integer or zero value of `n`, and has a parent element|`tr:nth-last-child(-n+2)` the last two rows of a table|
+|`:nth-of-type(an+b)`|elements that have `an+b-1` siblings with the same expanded element name before it in the document tree, for any zero or positive integer value of `n`, and has a parent element|`img:nth-of-type(2n+1)`|
+|`:nth-last-of-type(an+b)`|elements that have `an+b-1` siblings with the same expanded element name after it in the document tree, for any zero or positive integer value of `n`, and has a parent element|`img:nth-last-of-type(2n+1)`|
+|`:first-child`|elements that are the first child of some other element|`div > p:first-child`|
+|`:last-child`|elements that are the last child of some other element|`ol > li:last-child`|
+|`:first-of-type`|elements that are the first sibling of its type in the list of children of its parent element|`dl dt:first-of-type`|
+|`:last-of-type`|elements that are the last sibling of its type in the list of children of its parent element|`tr > td:last-of-type`|
+|`:only-child`|elements that have a parent element and whose parent element hasve no other element children||
+|`:only-of-type`|an element that has a parent element and whose parent element has no other element children with the same expanded element name||
+|`:empty`|elements that have no children at all||
 
 # Web-scraping
 Form model selenium binding also can be used to extract data from the source HTML pages.
