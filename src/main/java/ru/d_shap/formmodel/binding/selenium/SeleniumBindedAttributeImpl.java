@@ -1,15 +1,15 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-// Form model selenium binding is a form model binding implementation for Selenium.
+// Form model Selenium binding is a form model binding implementation for Selenium WebDriver.
 // Copyright (C) 2018 Dmitry Shapovalov.
 //
-// This file is part of form model selenium binding.
+// This file is part of form model Selenium binding.
 //
-// Form model selenium binding is free software: you can redistribute it and/or modify
+// Form model Selenium binding is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Form model selenium binding is distributed in the hope that it will be useful,
+// Form model Selenium binding is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.

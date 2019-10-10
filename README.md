@@ -1,5 +1,5 @@
-# Form model selenium binding
-Form model selenium binding is a form model binding implementation for Selenium.
+# Form model Selenium binding
+Form model Selenium binding is a form model binding implementation for Selenium WebDriver.
 
 This is the Page Object Design Pattern implementation.
 Page Object is a Design Pattern which has become popular in test automation for enhancing test maintenance and reducing code duplication.
@@ -224,7 +224,7 @@ Selectors are case insensitive (including against elements, attributes, and attr
 |`:empty`|elements that have no children at all||
 
 # Web-scraping
-Form model selenium binding also can be used to extract data from the source HTML pages.
+Form model Selenium binding also can be used to extract data from the source HTML pages.
 But it is rather slow because additional processes are created (Internet Browser process, Selenium WebDriver process) and additional communication between this processes is needed.
 ```
 // Load form definitions
@@ -299,7 +299,7 @@ Form model library:
 * **&lt;artifactId&gt;**: form-model
 * **&lt;version&gt;**: 1.0
 
-Form model selenium binding:
+Form model Selenium binding:
 * **&lt;groupId&gt;**: ru.d-shap
 * **&lt;artifactId&gt;**: form-model-binding-selenium
 * **&lt;version&gt;**: 1.0.0

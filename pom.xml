@@ -7,8 +7,8 @@
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
-    <name>Form model selenium binding</name>
-    <description>Form model selenium binding is a form model binding implementation for Selenium</description>
+    <name>Form model Selenium binding</name>
+    <description>Form model Selenium binding is a form model binding implementation for Selenium WebDriver</description>
     <url>https://github.com/d-shap/form-model-binding-selenium</url>
 
     <licenses>
