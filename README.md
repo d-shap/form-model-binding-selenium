@@ -256,7 +256,7 @@ for (SeleniumBindedElement bindedElement: bindedElements) {
 webDriver.quit();
 ```
 
-If the source HTML page does not use AJAX-requests or JavaScript DOM manipulations, then form model html binding can be used to extract data from the source HTML page.
+If the source HTML page does not use AJAX-requests or JavaScript DOM manipulations, then form model HTML binding can be used to extract data from the source HTML page.
 ```
 // Load form definitions
 FormDefinitions formDefinitions = new FormDefinitions();
