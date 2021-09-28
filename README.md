@@ -6,12 +6,12 @@ Page Object is a Design Pattern which has become popular in test automation for 
 A Page Object serves as an interface to the source page of the application.
 The application uses the Page Object whenever it needs to interact with the UI of that source page.
 The benefit is that if the UI changes for the source page, the application themselves don’t need to change, only the Page Object needs to change.
-Subsequently all changes to support that new UI are located in one place.
+Subsequently, all changes to support that new UI are located in one place.
 
 But, unlike the Page Object Design Pattern, form model is not an object-oriented class.
 It is the XML definition of the page elements.
-This definition is binded with the source page and the result of this binding is the binded form.
-Binded elements can be obtained from this binded form and the application uses this binded elements to interact with the UI of the source page.
+This definition is binded with the source page, and the result of this binding is the binded form.
+Binded elements can be obtained from this binded form, and the application uses this binded elements to interact with the UI of the source page.
 
 For example, suppose the following source page:
 ```
@@ -105,7 +105,7 @@ Possible values are:
 * ```required``` - there should be exactly one element.
 * ```required+``` - there should be at least one element.
 * ```optional``` - there could be one element or no element at all.
-* ```optional+``` - there could be more then one element or no element at all.
+* ```optional+``` - there could be more than one element or no element at all.
 * ```prohibited``` - there should not be any element.
 
 Child elements:
@@ -160,7 +160,7 @@ JSoup selectors are used in lookup attributes of the form definition.
 [https://jsoup.org/cookbook/extracting-data/selector-syntax](https://jsoup.org/cookbook/extracting-data/selector-syntax)
 
 A selector is a chain of simple selectors, separated by combinators.
-Selectors are case insensitive (including against elements, attributes, and attribute values).
+Selectors are case-insensitive (including against elements, attributes, and attribute values).
 
 ## Selectors
 |Pattern|Matches|Example|
@@ -205,7 +205,7 @@ Selectors are case insensitive (including against elements, attributes, and attr
 |`:containsData(data)`|elements that contains the specified data (the contents of script and style elements, and comment nodes (etc) are considered data nodes, not text nodes)|`script:contains(jsoup)` finds *script* elements containing the data *jsoup*|
 ||the above may be combined in any order and with other selectors|`.light:contains(name):eq(0)`|
 * The above indexed pseudo-selectors are 0-based, that is, the first element is at index 0, the second at 1, etc
-* The above text pseudo-selectors are case insensitive
+* The above text pseudo-selectors are case-insensitive
 
 ## Structural pseudo selectors
 |Pattern|Matches|Example|
@@ -225,7 +225,7 @@ Selectors are case insensitive (including against elements, attributes, and attr
 
 # Web-scraping
 Form model Selenium binding also can be used to extract data from the source HTML pages.
-But it is rather slow because additional processes are created (Internet Browser process, Selenium WebDriver process) and additional communication between this processes is needed.
+But it is rather slow because additional processes are created (Internet Browser process, Selenium WebDriver process) and additional communication between these processes is needed.
 ```
 // Load form definitions
 FormDefinitions formDefinitions = new FormDefinitions();
@@ -293,7 +293,7 @@ webDriver.quit();
 # HOW TO
 [HOW TO examples](HOWTO.md)
 
-# Latest release
+# The latest release
 Form model library:
 * **&lt;groupId&gt;**: ru.d-shap
 * **&lt;artifactId&gt;**: form-model
