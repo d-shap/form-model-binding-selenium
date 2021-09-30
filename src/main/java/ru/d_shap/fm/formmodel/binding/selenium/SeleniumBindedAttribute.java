@@ -17,37 +17,15 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-package ru.d_shap.formmodel.binding.selenium;
+package ru.d_shap.fm.formmodel.binding.selenium;
 
-import ru.d_shap.formmodel.binding.html.HtmlBindedAttribute;
+import ru.d_shap.fm.formmodel.binding.html.HtmlBindedAttribute;
 
 /**
- * The Selenium binded attribute implementation.
+ * The Selenium binded attribute.
  *
  * @author Dmitry Shapovalov
  */
-final class SeleniumBindedAttributeImpl implements SeleniumBindedAttribute {
-
-    private final HtmlBindedAttribute _htmlBindedAttribute;
-
-    SeleniumBindedAttributeImpl(final HtmlBindedAttribute htmlBindedAttribute) {
-        super();
-        _htmlBindedAttribute = htmlBindedAttribute;
-    }
-
-    @Override
-    public String getName() {
-        return _htmlBindedAttribute.getName();
-    }
-
-    @Override
-    public String getValue() {
-        return _htmlBindedAttribute.getValue();
-    }
-
-    @Override
-    public String getAbsoluteValue() {
-        return _htmlBindedAttribute.getAbsoluteValue();
-    }
+public interface SeleniumBindedAttribute extends HtmlBindedAttribute {
 
 }

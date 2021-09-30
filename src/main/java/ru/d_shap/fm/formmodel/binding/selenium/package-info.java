@@ -102,4 +102,4 @@
  * webDriver.quit();
  * }</pre>
  */
-package ru.d_shap.formmodel.binding.selenium;
+package ru.d_shap.fm.formmodel.binding.selenium;

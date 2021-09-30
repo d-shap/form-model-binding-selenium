@@ -17,7 +17,7 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-package ru.d_shap.formmodel.binding.selenium;
+package ru.d_shap.fm.formmodel.binding.selenium;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,18 +25,18 @@ import java.util.List;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import ru.d_shap.formmodel.binding.FormInstanceBinder;
-import ru.d_shap.formmodel.binding.html.HtmlBindedAttribute;
-import ru.d_shap.formmodel.binding.html.HtmlBindedElement;
-import ru.d_shap.formmodel.binding.html.HtmlBindedForm;
-import ru.d_shap.formmodel.binding.html.HtmlFormInstanceBinder;
-import ru.d_shap.formmodel.binding.model.BindedAttribute;
-import ru.d_shap.formmodel.binding.model.BindedElement;
-import ru.d_shap.formmodel.binding.model.BindedForm;
-import ru.d_shap.formmodel.binding.model.BindingSource;
-import ru.d_shap.formmodel.definition.model.AttributeDefinition;
-import ru.d_shap.formmodel.definition.model.ElementDefinition;
-import ru.d_shap.formmodel.definition.model.FormDefinition;
+import ru.d_shap.fm.formmodel.binding.FormInstanceBinder;
+import ru.d_shap.fm.formmodel.binding.html.HtmlBindedAttribute;
+import ru.d_shap.fm.formmodel.binding.html.HtmlBindedElement;
+import ru.d_shap.fm.formmodel.binding.html.HtmlBindedForm;
+import ru.d_shap.fm.formmodel.binding.html.HtmlFormInstanceBinder;
+import ru.d_shap.fm.formmodel.binding.model.BindedAttribute;
+import ru.d_shap.fm.formmodel.binding.model.BindedElement;
+import ru.d_shap.fm.formmodel.binding.model.BindedForm;
+import ru.d_shap.fm.formmodel.binding.model.BindingSource;
+import ru.d_shap.fm.formmodel.definition.model.AttributeDefinition;
+import ru.d_shap.fm.formmodel.definition.model.ElementDefinition;
+import ru.d_shap.fm.formmodel.definition.model.FormDefinition;
 
 /**
  * Form instance binder Selenium implementation.

@@ -17,38 +17,37 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-package ru.d_shap.formmodel.binding.selenium;
+package ru.d_shap.fm.formmodel.binding.selenium;
 
-import org.jsoup.nodes.Document;
-import org.openqa.selenium.WebDriver;
-
-import ru.d_shap.formmodel.binding.html.HtmlBindedForm;
+import ru.d_shap.fm.formmodel.binding.html.HtmlBindedAttribute;
 
 /**
- * The Selenium binded form implementation.
+ * The Selenium binded attribute implementation.
  *
  * @author Dmitry Shapovalov
  */
-final class SeleniumBindedFormImpl implements SeleniumBindedForm {
+final class SeleniumBindedAttributeImpl implements SeleniumBindedAttribute {
 
-    private final WebDriver _webDriver;
+    private final HtmlBindedAttribute _htmlBindedAttribute;
 
-    private final HtmlBindedForm _htmlBindedForm;
-
-    SeleniumBindedFormImpl(final WebDriver webDriver, final HtmlBindedForm htmlBindedForm) {
+    SeleniumBindedAttributeImpl(final HtmlBindedAttribute htmlBindedAttribute) {
         super();
-        _webDriver = webDriver;
-        _htmlBindedForm = htmlBindedForm;
+        _htmlBindedAttribute = htmlBindedAttribute;
     }
 
     @Override
-    public Document getDocument() {
-        return _htmlBindedForm.getDocument();
+    public String getName() {
+        return _htmlBindedAttribute.getName();
     }
 
     @Override
-    public WebDriver getWebDriver() {
-        return _webDriver;
+    public String getValue() {
+        return _htmlBindedAttribute.getValue();
+    }
+
+    @Override
+    public String getAbsoluteValue() {
+        return _htmlBindedAttribute.getAbsoluteValue();
     }
 
 }

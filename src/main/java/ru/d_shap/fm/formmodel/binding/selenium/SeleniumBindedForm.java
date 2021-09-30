@@ -17,15 +17,24 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-package ru.d_shap.formmodel.binding.selenium;
+package ru.d_shap.fm.formmodel.binding.selenium;
 
-import ru.d_shap.formmodel.binding.html.HtmlBindedAttribute;
+import org.openqa.selenium.WebDriver;
+
+import ru.d_shap.fm.formmodel.binding.html.HtmlBindedForm;
 
 /**
- * The Selenium binded attribute.
+ * The Selenium binded form.
  *
  * @author Dmitry Shapovalov
  */
-public interface SeleniumBindedAttribute extends HtmlBindedAttribute {
+public interface SeleniumBindedForm extends HtmlBindedForm {
+
+    /**
+     * Get the web driver.
+     *
+     * @return the web driver.
+     */
+    WebDriver getWebDriver();
 
 }

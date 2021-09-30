@@ -17,24 +17,37 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-package ru.d_shap.formmodel.binding.selenium;
+package ru.d_shap.fm.formmodel.binding.selenium;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
-import ru.d_shap.formmodel.binding.html.HtmlBindingSource;
-
 /**
- * The Selenium binding source.
+ * The Selenium binding source implementation.
  *
  * @author Dmitry Shapovalov
  */
-public interface SeleniumBindingSource extends HtmlBindingSource {
+final class SeleniumBindingSourceImpl implements SeleniumBindingSource {
 
-    /**
-     * Get the web driver.
-     *
-     * @return the web driver.
-     */
-    WebDriver getWebDriver();
+    private final WebDriver _webDriver;
+
+    SeleniumBindingSourceImpl(final WebDriver webDriver) {
+        super();
+        _webDriver = webDriver;
+    }
+
+    @Override
+    public Document getDocument() {
+        String html = _webDriver.getPageSource();
+        String baseUrl = (String) ((JavascriptExecutor) _webDriver).executeScript("return document.location.href");
+        return Jsoup.parse(html, baseUrl);
+    }
+
+    @Override
+    public WebDriver getWebDriver() {
+        return _webDriver;
+    }
 
 }
